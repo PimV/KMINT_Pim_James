@@ -8,6 +8,7 @@
 #include "Edge.h"
 #include <SDL_image.h>
 #include "Cow.h"
+#include "States.h"
 
 #include <random>
 #include <iostream>

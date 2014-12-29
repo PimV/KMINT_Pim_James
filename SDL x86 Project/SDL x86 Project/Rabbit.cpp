@@ -5,6 +5,7 @@
 Rabbit::Rabbit(void)
 {
 	this->setTexture(IMG_LoadTexture(GameStateManager::Instance()->getMySDL()->getRenderer(), "rabbit-3.png"));
+	this->changeState(StateFactory::createState(States::Wandering));
 }
 
 void Rabbit::draw() {

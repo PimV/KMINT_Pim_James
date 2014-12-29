@@ -31,6 +31,12 @@
     <Filter Include="Source Files\View">
       <UniqueIdentifier>{64114b5f-bb86-415a-b785-4b95bc9498e9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Model\EntityStates">
+      <UniqueIdentifier>{c6dd3031-f9c2-48a6-b64a-926a14cc3fee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Model\EntityStates">
+      <UniqueIdentifier>{9e0b362e-bbc4-4985-9900-f7fcbb227907}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameStateManager.cpp">
@@ -66,6 +72,18 @@
     <ClCompile Include="Rabbit.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
+    <ClCompile Include="BaseState.cpp">
+      <Filter>Source Files\Model\EntityStates</Filter>
+    </ClCompile>
+    <ClCompile Include="WanderingState.cpp">
+      <Filter>Source Files\Model\EntityStates</Filter>
+    </ClCompile>
+    <ClCompile Include="StateFactory.cpp">
+      <Filter>Source Files\Model\EntityStates</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>Source Files\Model\EntityStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -98,8 +116,23 @@
     <ClInclude Include="Cow.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
+    <ClInclude Include="BaseState.h">
+      <Filter>Header Files\Model\EntityStates</Filter>
+    </ClInclude>
+    <ClInclude Include="WanderingState.h">
+      <Filter>Header Files\Model\EntityStates</Filter>
+    </ClInclude>
     <ClInclude Include="Rabbit.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="States.h">
+      <Filter>Header Files\Model\EntityStates</Filter>
+    </ClInclude>
+    <ClInclude Include="StateFactory.h">
+      <Filter>Header Files\Model\EntityStates</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>Header Files\Model\EntityStates</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

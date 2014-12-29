@@ -1,11 +1,12 @@
 #include "Cow.h"
 #include "GameStateManager.h"
 #include "Vertex.h"
-
 Cow::Cow(void)
 {
 	this->setTexture(IMG_LoadTexture(GameStateManager::Instance()->getMySDL()->getRenderer(), "cow-2.png"));
 	this->route = nullptr;
+	//m_pStateMachine = new StateMachine<Cow>(this);
+	//m_pStateMachine->SetCurrentState(WanderingState::Instance());	
 }
 
 void Cow::draw() {
@@ -22,6 +23,11 @@ void Cow::setRoute(std::vector<Vertex*>* route) {
 }
 
 void Cow::update() {
+
+	if (this->getCurrentState()) {
+		std::cout << "Executing state" << std::endl;
+		this->getCurrentState()->execute(this);
+	}
 
 	if (route != nullptr && !route->empty()) {
 		double diffX = abs(this->getX() - route->at(0)->getX());
@@ -51,8 +57,8 @@ void Cow::update() {
 			route->shrink_to_fit();
 		}
 	}
-
 }
+
 
 Cow::~Cow(void)
 {
