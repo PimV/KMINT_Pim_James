@@ -78,6 +78,9 @@
     <ClCompile Include="CowOwnedStates.cpp">
       <Filter>Source Files\Model\EntityStates</Filter>
     </ClCompile>
+    <ClCompile Include="RabbitOwnedStates.cpp">
+      <Filter>Source Files\Model\EntityStates</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -123,6 +126,9 @@
       <Filter>Header Files\Model\EntityStates</Filter>
     </ClInclude>
     <ClInclude Include="CowOwnedStates.h">
+      <Filter>Header Files\Model\EntityStates</Filter>
+    </ClInclude>
+    <ClInclude Include="RabbitOwnedStates.h">
       <Filter>Header Files\Model\EntityStates</Filter>
     </ClInclude>
   </ItemGroup>

@@ -10,10 +10,11 @@ Cow::Cow(void)
 {
 	this->setTexture(IMG_LoadTexture(GameStateManager::Instance()->getMySDL()->getRenderer(), "cow-2.png"));
 	this->route = new std::vector<Vertex*>();
-	this->graph = nullptr;
+	//this->graph = nullptr;
 
 	m_pStateMachine = new StateMachine<Cow>(this);
 	m_pStateMachine->SetCurrentState(WanderAround::Instance());
+
 }
 
 void Cow::draw() {
@@ -34,9 +35,9 @@ std::vector<Vertex*>* Cow::getRoute() {
 	return this->route;
 }
 
-void Cow::setGraph(Graph* graph) {
-	this->graph = graph;
-}
+//void Cow::setGraph(Graph* graph) {
+//	this->graph = graph;
+//}
 
 bool Cow::onRabbit() {
 	if (route == nullptr) {
@@ -54,10 +55,6 @@ bool Cow::onRabbit() {
 }
 
 void Cow::followRoute() {
-	/*if (route->size() == 0) {
-	route = graph->getRouteToRabbit();
-	graph->setCowVertex(route->at(route->size() -1));
-	}*/
 	if (route != nullptr && !route->empty()) {
 		double diffX = abs(this->getX() - route->at(0)->getX());
 		double diffY = abs(this->getY() - route->at(0)->getY());
@@ -82,7 +79,7 @@ void Cow::followRoute() {
 
 
 		if (this->getX() > route->at(0)->getX() - 2 && this->getX() < route->at(0)->getX() + 2 && this->getY() > route->at(0)->getY() - 2 && this->getY() < route->at(0)->getY() +2) {
-			graph->setCowVertex(route->at(route->size() -1));
+			this->getGraph()->setCowVertex(route->at(route->size() -1));
 			route->erase(route->begin());
 			route->shrink_to_fit();
 		}
@@ -92,8 +89,8 @@ void Cow::followRoute() {
 
 void Cow::chase() {
 
-	route = graph->getRouteToRabbit();
-	graph->setCowVertex(route->at(route->size() -1));
+	route = this->getGraph()->getRouteToRabbit();
+	this->getGraph()->setCowVertex(route->at(route->size() -1));
 
 }
 
@@ -102,19 +99,17 @@ void Cow::wander() {
 	while(wanderToVertex == nullptr) {
 		std::random_device dev;
 		std::default_random_engine dre(dev());
-		std::uniform_int_distribution<int> dist1(0, graph->getCowVertex()->getEdges()->size() - 1);
+		std::uniform_int_distribution<int> dist1(0, this->getGraph()->getCowVertex()->getEdges()->size() - 1);
 
 		int index = dist1(dre);
-		wanderToVertex = graph->getCowVertex()->getEdges()->at(index)->getChild();
-		std::cout << "in while" << std::endl;
+		wanderToVertex = this->getGraph()->getCowVertex()->getEdges()->at(index)->getChild();
 	}
 	route->push_back(wanderToVertex);
-	graph->setCowVertex(wanderToVertex);
-	//graph->setCowVertex(route->at(route->size() -1));
+	this->getGraph()->setCowVertex(wanderToVertex);
+
 }
 
 void Cow::update() {
-
 	m_pStateMachine->Update();	
 }
 

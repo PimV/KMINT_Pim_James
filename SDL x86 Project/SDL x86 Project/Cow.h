@@ -5,7 +5,6 @@
 #include <vector>
 template <class entity_type> class State;
 class Vertex;
-class Graph;
 class Cow :
 	public Entity
 {
@@ -17,7 +16,7 @@ public:
 
 	void setRoute(std::vector<Vertex*>* route);
 	std::vector<Vertex*>* getRoute();
-	void setGraph(Graph* graph);
+	//void setGraph(Graph* graph) override;
 
 	//State actions
 	void followRoute();

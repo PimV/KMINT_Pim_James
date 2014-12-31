@@ -19,6 +19,14 @@ void Entity::update() {
 
 }
 
+void Entity::setGraph(Graph* graph) {
+	this->graph = graph;
+}
+
+Graph* Entity::getGraph() {
+	return this->graph;
+}
+
 SDL_Texture* Entity::getTexture() {
 	return this->texture;
 }
