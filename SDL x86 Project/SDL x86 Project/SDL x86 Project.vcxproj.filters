@@ -72,16 +72,10 @@
     <ClCompile Include="Rabbit.cpp">
       <Filter>Source Files\Model</Filter>
     </ClCompile>
-    <ClCompile Include="BaseState.cpp">
-      <Filter>Source Files\Model\EntityStates</Filter>
-    </ClCompile>
     <ClCompile Include="WanderingState.cpp">
       <Filter>Source Files\Model\EntityStates</Filter>
     </ClCompile>
-    <ClCompile Include="StateFactory.cpp">
-      <Filter>Source Files\Model\EntityStates</Filter>
-    </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
+    <ClCompile Include="CowOwnedStates.cpp">
       <Filter>Source Files\Model\EntityStates</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,22 +110,19 @@
     <ClInclude Include="Cow.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="BaseState.h">
-      <Filter>Header Files\Model\EntityStates</Filter>
-    </ClInclude>
     <ClInclude Include="WanderingState.h">
       <Filter>Header Files\Model\EntityStates</Filter>
     </ClInclude>
     <ClInclude Include="Rabbit.h">
       <Filter>Header Files\Model</Filter>
     </ClInclude>
-    <ClInclude Include="States.h">
-      <Filter>Header Files\Model\EntityStates</Filter>
-    </ClInclude>
-    <ClInclude Include="StateFactory.h">
-      <Filter>Header Files\Model\EntityStates</Filter>
-    </ClInclude>
     <ClInclude Include="StateMachine.h">
+      <Filter>Header Files\Model\EntityStates</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\Model\EntityStates</Filter>
+    </ClInclude>
+    <ClInclude Include="CowOwnedStates.h">
       <Filter>Header Files\Model\EntityStates</Filter>
     </ClInclude>
   </ItemGroup>

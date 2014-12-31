@@ -1,29 +1,43 @@
 #pragma once
 #include "Entity.h"
-#include <vector>
 #include "StateMachine.h"
 #include "WanderingState.h"
+#include <vector>
+template <class entity_type> class State;
 class Vertex;
+class Graph;
 class Cow :
 	public Entity
 {
 public:
-	Cow(void) {
-		m_pStateMachine = new StateMachine<Cow>(this);
-		m_pStateMachine->SetCurrentState(WanderingState::Instance());
-		m_pStateMachine->SetGlobalState(WanderingState::Instance());
-	};
+	Cow(void);
 
 	void draw();
 	void update();
 
 	void setRoute(std::vector<Vertex*>* route);
+	std::vector<Vertex*>* getRoute();
+	void setGraph(Graph* graph);
+
+	//State actions
+	void followRoute();
+	void chase();
+	void wander();
+
+	bool onRabbit();
+
+	StateMachine<Cow>* GetFSM() const { 
+		return m_pStateMachine;
+	};
+
 
 	virtual ~Cow(void);
 
 private:
 	std::vector<Vertex*>* route;
+	Graph* graph;
 	StateMachine<Cow>* m_pStateMachine;
+
 
 };
 

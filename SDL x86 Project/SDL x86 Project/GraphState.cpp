@@ -8,7 +8,8 @@
 #include "Edge.h"
 #include <SDL_image.h>
 #include "Cow.h"
-#include "States.h"
+
+#include "CowOwnedStates.h"
 
 #include <random>
 #include <iostream>
@@ -27,7 +28,7 @@ void GraphState::init(GameStateManager *gsm) {
 	rabbit = new Rabbit();
 	route = new std::vector<Vertex*>();
 
-	updatesTillRabbitJumps = 100;
+	updatesTillRabbitJumps = 300;
 	updatesSinceRabbitJump = 0;
 
 	if (cowTexture == NULL) {
@@ -86,6 +87,8 @@ void GraphState::init(GameStateManager *gsm) {
 
 	graph->linkVertex(v7, v9, 360);
 	graph->linkVertex(v8, v9, 360);
+
+	cow->setGraph(graph);
 }
 
 void GraphState::cleanup() 
@@ -107,9 +110,10 @@ void GraphState::handleEvents(SDL_Event mainEvent)
 	case SDL_MOUSEBUTTONDOWN:
 		SDL_GetMouseState(&x, &y);
 		if (mainEvent.button.button == SDL_BUTTON_LEFT) {
-			route = graph->AStar(graph->getCowVertex(), graph->getRabbitVertex());
-			cow->setRoute(route);
-			graph->setCowVertex(route->at(route->size() -1));
+			cow->GetFSM()->ChangeState(ChaseRabbit::Instance());
+			//route = graph->AStar(graph->getCowVertex(), graph->getRabbitVertex());
+			//cow->setRoute(route);
+			//graph->setCowVertex(route->at(route->size() -1));
 		} else if (mainEvent.button.button == SDL_BUTTON_RIGHT) {
 
 		}
@@ -119,37 +123,40 @@ void GraphState::handleEvents(SDL_Event mainEvent)
 
 void GraphState::update(double dt) 
 {
-	//cow->setRoute(route);
-	cow->update();
-	rabbit->update();
-	if (route != nullptr) {
+	if (cow->getRoute()->size() == 0) {
+		updatesSinceRabbitJump++;
+		if (graph->getCowVertex() == graph->getRabbitVertex() || updatesSinceRabbitJump > updatesTillRabbitJumps) {
 
-		if (route->size() == 0) {
-			updatesSinceRabbitJump++;
-			if (graph->getCowVertex() == graph->getRabbitVertex() || updatesSinceRabbitJump > updatesTillRabbitJumps) {
+			Vertex* newRabbitVertex = nullptr;
+			while(newRabbitVertex == nullptr || newRabbitVertex == graph->getCowVertex() || newRabbitVertex == graph->getRabbitVertex()) {
+				std::random_device dev;
+				std::default_random_engine dre(dev());
+				std::uniform_int_distribution<int> dist1(0, graph->getVertices()->size() - 1);
 
-				Vertex* newRabbitVertex = nullptr;
-				while(newRabbitVertex == nullptr || newRabbitVertex == graph->getCowVertex() || newRabbitVertex == graph->getRabbitVertex()) {
-					std::random_device dev;
-					std::default_random_engine dre(dev());
-					std::uniform_int_distribution<int> dist1(0, graph->getVertices()->size() - 1);
-
-					int index = dist1(dre);
-					newRabbitVertex = graph->getVertices()->at(index);
-				}
-				rabbit->setDestination(newRabbitVertex);
-				graph->setRabbitVertex(newRabbitVertex);
-
-				this->rabbitVertex = newRabbitVertex;
-				updatesSinceRabbitJump = 0;
+				int index = dist1(dre);
+				newRabbitVertex = graph->getVertices()->at(index);
 			}
+			rabbit->setDestination(newRabbitVertex);
+			graph->setRabbitVertex(newRabbitVertex);
+
+			this->rabbitVertex = newRabbitVertex;
+			updatesSinceRabbitJump = 0;
 		}
 	}
+
+
+	cow->update();
+	rabbit->update();
+
+
+
+
+
+
 }
 
 void GraphState::draw() 
 {	
-
 	for(size_t i = 0; i < this->graph->getVertices()->size(); i++) {
 		int x = this->graph->getVertices()->at(i)->getX();
 		int y = this->graph->getVertices()->at(i)->getY();

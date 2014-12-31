@@ -22,6 +22,8 @@ public:
 	int calculateHeuristic(Vertex* start, Vertex* goal);
 	std::vector<Vertex*>* AStar(Vertex* start, Vertex* goal);
 
+	std::vector<Vertex*>* getRouteToRabbit();
+
 	std::vector<Vertex*>* getVertices();
 
 	~Graph(void);

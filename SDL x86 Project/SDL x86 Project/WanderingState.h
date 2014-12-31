@@ -1,15 +1,15 @@
 #pragma once
-#include "basestate.h"
-
+#include "State.h"
+class Entity;
 class WanderingState :
-	public BaseState
+	public State<Entity>
 {
 public:
 	WanderingState(void);
 
-	virtual void enter(Entity* entity);
-	virtual void execute(Entity* entity);
-	virtual void exit(Entity* entity);
+	virtual void Enter(Entity* entity);
+	virtual void Execute(Entity* entity);
+	virtual void Exit(Entity* entity);
 
 	static WanderingState* Instance();
 

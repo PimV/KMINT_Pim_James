@@ -53,6 +53,10 @@ int Graph::calculateHeuristic(Vertex* start, Vertex* goal) {
 	return sqrt(pow((start->getX() - goal->getX()), 2) + pow(start->getY() - goal->getY(), 2));
 }
 
+std::vector<Vertex*>* Graph::getRouteToRabbit() {
+	return this->AStar(this->getCowVertex(), this->getRabbitVertex());
+}
+
 std::vector<Vertex*>* Graph::AStar(Vertex* start, Vertex* goal) {
 	std::map<Vertex*, double> openList;
 	std::vector<Vertex*>* closedList = new std::vector<Vertex*>();

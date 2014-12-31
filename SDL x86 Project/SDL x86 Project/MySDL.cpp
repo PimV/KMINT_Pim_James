@@ -23,6 +23,8 @@ void MySDL::init() {
 		);
 
 	renderer = SDL_CreateRenderer(window, -1, 0);
+
+	TTF_Init();
 }
 
 void MySDL::drawScreen() {
@@ -57,6 +59,32 @@ void MySDL::drawLine(int x1, int y1, int x2, int y2, int r, int g, int b) {
 	this->setRenderColor(r,g,b);
 	SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
 	this->resetRenderColor();
+}
+
+void MySDL::drawText(std::string msg, int x, int y, int w, int h) {
+	std::string path = std::string(SDL_GetBasePath()).append("segoeuib.ttf").c_str();
+	font = TTF_OpenFont(path.c_str(), h);
+
+	SDL_Surface* imgTxt;
+	SDL_Rect txtRect;
+	SDL_Color fColor;
+
+	txtRect.x = x;
+	txtRect.y = y;
+	txtRect.w = msg.length() * h / 3;
+	txtRect.h = h;
+
+	fColor.r = fColor.g = fColor.b = 245;
+	imgTxt = TTF_RenderText_Blended(font, msg.c_str(), fColor);
+
+	SDL_Texture* imgTxture = SDL_CreateTextureFromSurface(this->getRenderer(), imgTxt);
+
+	SDL_RenderCopy(this->getRenderer(), imgTxture, NULL, &txtRect);
+
+
+	TTF_CloseFont(font);
+	SDL_DestroyTexture(imgTxture);
+	SDL_FreeSurface(imgTxt);
 }
 
 void MySDL::setRenderColor(int r, int g, int b) {
