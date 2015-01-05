@@ -14,7 +14,14 @@ Cow::Cow(void)
 
 	m_pStateMachine = new StateMachine<Cow>(this);
 	m_pStateMachine->SetCurrentState(WanderAround::Instance());
+	m_pStateMachine->CurrentState()->Enter(this);
+}
 
+void Cow::setDestination(Vertex* destination) {
+	if (destination != nullptr) {
+		this->setX(destination->getX());
+		this->setY(destination->getY());
+	}
 }
 
 void Cow::draw() {
@@ -34,10 +41,6 @@ void Cow::setRoute(std::vector<Vertex*>* route) {
 std::vector<Vertex*>* Cow::getRoute() {
 	return this->route;
 }
-
-//void Cow::setGraph(Graph* graph) {
-//	this->graph = graph;
-//}
 
 bool Cow::onRabbit() {
 	if (route == nullptr) {
@@ -79,18 +82,17 @@ void Cow::followRoute() {
 
 
 		if (this->getX() > route->at(0)->getX() - 2 && this->getX() < route->at(0)->getX() + 2 && this->getY() > route->at(0)->getY() - 2 && this->getY() < route->at(0)->getY() +2) {
-			this->getGraph()->setCowVertex(route->at(route->size() -1));
+			this->getGraph()->setCowVertex(route->at(0));
 			route->erase(route->begin());
 			route->shrink_to_fit();
 		}
 	}
-
 }
 
 void Cow::chase() {
 
 	route = this->getGraph()->getRouteToRabbit();
-	this->getGraph()->setCowVertex(route->at(route->size() -1));
+	//this->getGraph()->setCowVertex(route->at(route->size() -1));
 
 }
 
@@ -105,7 +107,7 @@ void Cow::wander() {
 		wanderToVertex = this->getGraph()->getCowVertex()->getEdges()->at(index)->getChild();
 	}
 	route->push_back(wanderToVertex);
-	this->getGraph()->setCowVertex(wanderToVertex);
+	//this->getGraph()->setCowVertex(wanderToVertex);
 
 }
 

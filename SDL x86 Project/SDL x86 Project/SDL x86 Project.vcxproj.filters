@@ -81,6 +81,9 @@
     <ClCompile Include="RabbitOwnedStates.cpp">
       <Filter>Source Files\Model\EntityStates</Filter>
     </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Main.h">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="RabbitOwnedStates.h">
       <Filter>Header Files\Model\EntityStates</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files\Model</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

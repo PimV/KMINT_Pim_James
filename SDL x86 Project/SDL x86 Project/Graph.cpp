@@ -5,6 +5,9 @@
 #include <math.h>
 #include <algorithm>
 #include <map>
+#include "Rabbit.h"
+#include "Cow.h"
+#include <random>
 
 Graph::Graph(void)
 {
@@ -28,6 +31,47 @@ void Graph::insertLast(Vertex* v) {
 		this->root = v;
 	}
 	this->vertices->push_back(v);
+}
+
+void Graph::setCow(Cow* cow) {
+	this->cow = cow;
+}
+
+Cow* Graph::getCow() {
+	return this->cow;
+}
+
+void Graph::setRabbit(Rabbit* rabbit) {
+	this->rabbit = rabbit;
+}
+
+Rabbit* Graph::getRabbit() {
+	return this->rabbit;
+}
+
+void Graph::setWeapon(Weapon* weapon) {
+	this->weapon = weapon;
+}
+
+Weapon* Graph::getWeapon() {
+	return this->weapon;
+}
+
+void Graph::teleportCow() {
+	Vertex* destination = nullptr;
+	while(destination == nullptr || destination == getCowVertex() || destination == getRabbitVertex()) {
+		std::random_device dev;
+		std::default_random_engine dre(dev());
+		std::uniform_int_distribution<int> dist1(0, this->getVertices()->size() - 1);
+
+		int index = dist1(dre);
+		destination = this->getVertices()->at(index);
+	}
+	this->cow->setDestination(destination);
+	while(this->cow->getRoute()->size() > 0) {
+		this->cow->getRoute()->pop_back();
+	}
+	this->setCowVertex(destination);
 }
 
 void Graph::linkVertex(Vertex* source, Vertex* target, int weight) {
@@ -116,12 +160,20 @@ void Graph::setRabbitVertex(Vertex* v) {
 	this->rabbitVertex = v;
 }
 
+void Graph::setWeaponVertex(Vertex* v) {
+	this->weaponVertex = v;
+}
+
 Vertex* Graph::getCowVertex() {
 	return this->cowVertex;
 }
 
 Vertex* Graph::getRabbitVertex() {
 	return this->rabbitVertex;
+}
+
+Vertex* Graph::getWeaponVertex() {
+	return this->weaponVertex;
 }
 
 std::vector<Vertex*>* Graph::getVertices() {

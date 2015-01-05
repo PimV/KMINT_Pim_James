@@ -110,6 +110,7 @@ copy "$(SolutionDir)libjpeg-9.dll" "$(TargetDir)"
     <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="WanderingState.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Cow.cpp" />
@@ -126,6 +127,7 @@ copy "$(SolutionDir)libjpeg-9.dll" "$(TargetDir)"
     <ClCompile Include="RabbitOwnedStates.cpp" />
     <ClCompile Include="Vertex.cpp" />
     <ClCompile Include="WanderingState.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

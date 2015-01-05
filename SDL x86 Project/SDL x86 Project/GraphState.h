@@ -6,6 +6,7 @@ class Graph;
 class Vertex;
 class Cow;
 class Rabbit;
+class Weapon;
 class GraphState : public IGameState
 {
 private:
@@ -16,6 +17,8 @@ private:
 
 	Cow* cow;
 	Rabbit* rabbit;
+	Weapon* weapon;
+	
 	std::vector<Vertex*>* route;
 
 	GameStateManager* gsm;
@@ -24,6 +27,7 @@ private:
 
 	Vertex* cowVertex;
 	Vertex* rabbitVertex;
+	Vertex* weaponVertex;
 
 	int updatesTillRabbitJumps;
 	int updatesSinceRabbitJump;
