@@ -1,7 +1,6 @@
 #pragma once
 #include "Entity.h"
 #include "StateMachine.h"
-#include "WanderingState.h"
 #include <vector>
 template <class entity_type> class State;
 class Vertex;
@@ -23,6 +22,9 @@ public:
 	void followRoute();
 	void chase();
 	void wander();
+
+	bool onEdge();
+	void decreaseRoute();
 
 	bool onRabbit();
 

@@ -13,7 +13,7 @@ Cow::Cow(void)
 	//this->graph = nullptr;
 
 	m_pStateMachine = new StateMachine<Cow>(this);
-	m_pStateMachine->SetCurrentState(WanderAround::Instance());
+	m_pStateMachine->SetCurrentState(WanderAroundCow::Instance());
 	m_pStateMachine->CurrentState()->Enter(this);
 }
 
@@ -47,12 +47,14 @@ bool Cow::onRabbit() {
 		return false;
 	}
 
-	if (route->size() == 0) {
+	if (graph->getCowVertex() == graph->getRabbitVertex()) {
+		graph->teleportRabbit();
 		return true;
 	}
 
-	return false;
-
+	if (route->size() == 0) {		
+		return true;
+	}
 
 	return false;
 }
@@ -80,34 +82,42 @@ void Cow::followRoute() {
 			}
 		}
 
-
-		if (this->getX() > route->at(0)->getX() - 2 && this->getX() < route->at(0)->getX() + 2 && this->getY() > route->at(0)->getY() - 2 && this->getY() < route->at(0)->getY() +2) {
-			this->getGraph()->setCowVertex(route->at(0));
-			route->erase(route->begin());
-			route->shrink_to_fit();
+		if (onEdge()) {
+			decreaseRoute();
 		}
 	}
 }
 
+bool Cow::onEdge() {
+	if (this->getX() > route->at(0)->getX() - 2 && this->getX() < route->at(0)->getX() + 2 &&
+		this->getY() > route->at(0)->getY() - 2 && this->getY() < route->at(0)->getY() + 2) {
+			return true;
+	}
+	return false;
+}
+
+void Cow::decreaseRoute() {
+	this->getGraph()->setCowVertex(route->at(0));
+	route->erase(route->begin());
+	route->shrink_to_fit();
+}
+
 void Cow::chase() {
-
-	route = this->getGraph()->getRouteToRabbit();
-	//this->getGraph()->setCowVertex(route->at(route->size() -1));
-
+	this->setRoute(this->getGraph()->getRouteToRabbit());
 }
 
 void Cow::wander() {
 	Vertex* wanderToVertex = nullptr;
+	std::random_device dev;
+	std::default_random_engine dre(dev());
 	while(wanderToVertex == nullptr) {
-		std::random_device dev;
-		std::default_random_engine dre(dev());
 		std::uniform_int_distribution<int> dist1(0, this->getGraph()->getCowVertex()->getEdges()->size() - 1);
 
 		int index = dist1(dre);
 		wanderToVertex = this->getGraph()->getCowVertex()->getEdges()->at(index)->getChild();
 	}
 	route->push_back(wanderToVertex);
-	//this->getGraph()->setCowVertex(wanderToVertex);
+
 
 }
 

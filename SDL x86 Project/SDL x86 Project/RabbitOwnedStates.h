@@ -65,33 +65,4 @@ public:
   virtual void Exit(Rabbit* rabbit);
 };
 
-//------------------------------------------------------------------------
-//
-//  Koe zal achter de haas aan gaan om deze proberen te vangen
-//  
-//------------------------------------------------------------------------
-class FindWeapon : public State<Rabbit>
-{
-private:
-  
-  FindWeapon(){}
-
-  //copy ctor and assignment should be private
-  FindWeapon(const FindWeapon&);
-  FindWeapon& operator=(const FindWeapon&);
-
- 
-public:
-
-  //this is a singleton
-  static FindWeapon* Instance();
-
-  virtual void Enter(Rabbit* rabbit);
-
-  virtual void Execute(Rabbit* rabbit);
-
-  virtual void Exit(Rabbit* rabbit);
-};
-
-
 

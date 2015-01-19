@@ -57,7 +57,7 @@ Weapon* Graph::getWeapon() {
 	return this->weapon;
 }
 
-void Graph::teleportCow() {
+void Graph::teleportRabbit() {
 	Vertex* destination = nullptr;
 	while(destination == nullptr || destination == getCowVertex() || destination == getRabbitVertex()) {
 		std::random_device dev;
@@ -67,11 +67,11 @@ void Graph::teleportCow() {
 		int index = dist1(dre);
 		destination = this->getVertices()->at(index);
 	}
-	this->cow->setDestination(destination);
-	while(this->cow->getRoute()->size() > 0) {
-		this->cow->getRoute()->pop_back();
+	this->rabbit->setDestination(destination);
+	while(this->rabbit->getRoute()->size() > 0) {
+		this->rabbit->getRoute()->pop_back();
 	}
-	this->setCowVertex(destination);
+	this->setRabbitVertex(destination);
 }
 
 void Graph::linkVertex(Vertex* source, Vertex* target, int weight) {
@@ -172,9 +172,6 @@ Vertex* Graph::getRabbitVertex() {
 	return this->rabbitVertex;
 }
 
-Vertex* Graph::getWeaponVertex() {
-	return this->weaponVertex;
-}
 
 std::vector<Vertex*>* Graph::getVertices() {
 	return this->vertices;

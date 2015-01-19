@@ -14,22 +14,11 @@ ChaseRabbit* ChaseRabbit::Instance()
 
 void ChaseRabbit::Enter(Cow* cow)
 {
-	cow->chase();
 }
 
 
 void ChaseRabbit::Execute(Cow* cow)
 {	
-	if (cow->onEdge()) {
-		cow->chase();
-		cow->followRoute();	
-	}
-	cow->followRoute();	
-	
-	if (cow->onRabbit()) {
-		cow->GetFSM()->ChangeState(WanderAroundCow::Instance());
-		return;
-	}
 
 }
 
@@ -62,23 +51,7 @@ void WanderAroundCow::Enter(Cow* cow)
 
 void WanderAroundCow::Execute(Cow* cow)
 {
-	cow->followRoute();
-	
-	if (cow->getRoute()->size() == 0) {
-		if (wanderUpdates >= wanderUpdatesRequired) {
-			cow->GetFSM()->ChangeState(ChaseRabbit::Instance());
-			wanderUpdates = 0;
-			return;
-		}
 
-		updatesSince++;
-		std::cout << updatesSince << std::endl;
-		if (updatesSince > updateDelay) {
-			cow->wander();
-			wanderUpdates++;
-			updatesSince = 0;
-		}
-	}
 }
 
 

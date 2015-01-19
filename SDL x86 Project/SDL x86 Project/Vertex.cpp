@@ -116,7 +116,7 @@ Vertex* Vertex::addEdge(Vertex* child, int weight) {
 	} else {
 		for (size_t j = 0; j < this->getEdges()->size(); j++) {
 			if (this->getEdges()->at(j)->getParent() == this && this->getEdges()->at(j)->getChild() == child && this->getEdges()->at(j)->getWeight() == weight) {
-				std::cout << "Exact same edge exists" << std::endl;
+				//std::cout << "Exact same edge exists" << std::endl;
 			} else {
 				Edge* newEdge = new Edge();
 

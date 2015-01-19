@@ -6,7 +6,6 @@
 #include <random> 
 #include "Edge.h"
 #include "Cow.h"
-#include "Weapon.h"
 Rabbit::Rabbit(void)
 {
 	this->setTexture(IMG_LoadTexture(GameStateManager::Instance()->getMySDL()->getRenderer(), "rabbit-3.png"));
@@ -64,7 +63,7 @@ void Rabbit::flee() {
 	for(size_t i = 0; i < this->getGraph()->getRabbitVertex()->getEdges()->size(); i++) {
 		if (this->getGraph()->getRabbitVertex()->getEdges()->at(i)->getChild() != fastestRoute->at(0)) {
 			this->route = this->getGraph()->AStar(this->getGraph()->getRabbitVertex(), this->getGraph()->getRabbitVertex()->getEdges()->at(i)->getChild());
-			//this->route->push_back(this->getGraph()->getRabbitVertex()->getEdges()->at(i)->getChild());
+
 			break;
 		}
 	}
@@ -83,60 +82,12 @@ bool Rabbit::cowNearby() {
 	return false;
 }
 
-void Rabbit::setWeapon(Weapon* weapon) {
-	this->getGraph()->getWeapon()->setVisible(false);
-	this->weapon = weapon;
-}
-
-bool Rabbit::weaponNearby() {
-	if(this->getGraph()->getWeapon()->getVisible() == false) {
-		return false;
-	}
-	std::vector<Vertex*>* routeToWeapon = this->getGraph()->AStar(this->getGraph()->getRabbitVertex(), this->getGraph()->getWeaponVertex());
-	if (routeToWeapon->size() > 3) {
-		return false;
-	}
-	return true;
-}
-
-bool Rabbit::pillNearby() {
-	return false;
-}
-
-void Rabbit::shootCow() {
-	this->getGraph()->teleportCow();
-	this->weapon = nullptr;
-}
-
-bool Rabbit::hasWeapon() {
-	if (this->weapon == nullptr) {
-		return false;
-	}
-	return true;
-}
-
-void Rabbit::findWeapon() {
-	route = this->getGraph()->AStar(this->getGraph()->getRabbitVertex(), this->getGraph()->getWeaponVertex());
-}
-
-void Rabbit::grabWeapon() {
-	this->setWeapon(this->getGraph()->getWeapon());
-	//this->getGraph()->setWeaponVertex(nullptr);
-	this->weapon->setVisible(false);
-}
 
 bool Rabbit::onCow() {
 	if (this->getGraph()->getCowVertex() == this->getGraph()->getRabbitVertex()) {
 		return true;
 	}
 
-	return false;
-}
-
-bool Rabbit::onWeapon() {
-	if (this->getGraph()->getRabbitVertex() == this->getGraph()->getWeaponVertex()) {
-		return true;
-	}
 	return false;
 }
 

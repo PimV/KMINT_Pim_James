@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{78E699E4-4C5A-4E81-8289-0D68EF7FDA8B}</ProjectGuid>
+    <ProjectGuid>{F5A8D7AE-BF1B-4130-84B8-F08C27EAF08C}</ProjectGuid>
     <RootNamespace>SDL_x86_Project</RootNamespace>
-    <ProjectName>KMINT_Week2</ProjectName>
+    <ProjectName>KMINT_Week4</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -96,35 +96,29 @@ copy "$(SolutionDir)libjpeg-9.dll" "$(TargetDir)"
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CowOwnedStates.h" />
+    <ClInclude Include="MovingEntity.h" />
     <ClInclude Include="RabbitOwnedStates.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Cow.h" />
-    <ClInclude Include="Edge.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="GameStateManager.h" />
-    <ClInclude Include="Graph.h" />
     <ClInclude Include="GraphState.h" />
     <ClInclude Include="IGameState.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MySDL.h" />
     <ClInclude Include="Rabbit.h" />
     <ClInclude Include="StateMachine.h" />
-    <ClInclude Include="Vertex.h" />
+    <ClInclude Include="utils.h" />
+    <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Cow.cpp" />
     <ClCompile Include="CowOwnedStates.cpp" />
-    <ClCompile Include="Edge.cpp" />
-    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
-    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="GraphState.cpp" />
     <ClCompile Include="IGameState.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MySDL.cpp" />
-    <ClCompile Include="Rabbit.cpp" />
     <ClCompile Include="RabbitOwnedStates.cpp" />
-    <ClCompile Include="Vertex.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

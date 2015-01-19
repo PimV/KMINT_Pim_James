@@ -5,7 +5,6 @@
 #include "Rabbit.h"
 #include "Graph.h"
 #include "Vertex.h"
-#include "Weapon.h"
 #include "Edge.h"
 #include <SDL_image.h>
 #include "Cow.h"
@@ -27,7 +26,6 @@ void GraphState::init(GameStateManager *gsm) {
 
 	cow = new Cow();
 	rabbit = new Rabbit();
-	weapon = new Weapon();
 	route = new std::vector<Vertex*>();
 
 	updatesTillRabbitJumps = 300;
@@ -43,21 +41,21 @@ void GraphState::init(GameStateManager *gsm) {
 	}
 
 	graph = new Graph();
-
+	
 	Vertex* v1 = graph->createRoot(50, 250);
 
-	Vertex* v2 = graph->createVertex(175, 50); v2->setRabbit(true); rabbitVertex = v2; graph->setRabbitVertex(v2); rabbit->setX(v2->getX()); rabbit->setY(v2->getY());
+	Vertex* v2 = graph->createVertex(175, 50); 
 	Vertex* v3 = graph->createVertex(130, 500);
 
 	Vertex* v4 = graph->createVertex(370, 90); 
 	Vertex* v5 = graph->createVertex(330, 450); v5->setCow(true); cowVertex = v5; graph->setCowVertex(v5); cow->setX(v5->getX()); cow->setY(v5->getY());
 
-	Vertex* v6 = graph->createVertex(500, 350); weaponVertex = v6; graph->setWeaponVertex(v6); weapon->setX(v6->getX()); weapon->setY(v6->getY());
+	Vertex* v6 = graph->createVertex(500, 350);
 
 	Vertex* v7 = graph->createVertex(900, 200);
 	Vertex* v8 = graph->createVertex(900, 600);
 
-	Vertex* v9 = graph->createVertex(1200, 400); 
+	Vertex* v9 = graph->createVertex(1200, 400);  v9->setRabbit(true); rabbitVertex = v9; graph->setRabbitVertex(v9); rabbit->setX(v9->getX()); rabbit->setY(v9->getY());
 
 	Vertex* middle = graph->createVertex( 180, 250); 
 
@@ -92,11 +90,9 @@ void GraphState::init(GameStateManager *gsm) {
 
 	cow->setGraph(graph);
 	rabbit->setGraph(graph);
-	weapon->setGraph(graph);
 
 	graph->setCow(cow);
 	graph->setRabbit(rabbit);
-	graph->setWeapon(weapon);
 }
 
 void GraphState::cleanup() 
@@ -153,7 +149,6 @@ void GraphState::update(double dt)
 	}*/
 	rabbit->update();
 	cow->update();
-	weapon->update();
 
 
 
@@ -210,7 +205,6 @@ void GraphState::draw()
 	}
 	cow->draw();
 	rabbit->draw();
-	weapon->draw();
 
 
 

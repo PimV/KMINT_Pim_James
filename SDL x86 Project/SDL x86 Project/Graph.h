@@ -30,11 +30,10 @@ public:
 	void setWeapon(Weapon* weapon);
 	Weapon* getWeapon();
 
-	void teleportCow();
+	void teleportRabbit();
 
 	Vertex* getCowVertex();
 	Vertex* getRabbitVertex();
-	Vertex* getWeaponVertex();
 	int calculateHeuristic(Vertex* start, Vertex* goal);
 	std::vector<Vertex*>* AStar(Vertex* start, Vertex* goal);
 
