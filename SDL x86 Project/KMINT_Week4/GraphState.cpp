@@ -21,7 +21,12 @@ void GraphState::init(GameStateManager *gsm) {
 	rabbitTexture = IMG_LoadTexture(GameStateManager::Instance()->getMySDL()->getRenderer(), "rabbit-3.png");
 	cowTexture = IMG_LoadTexture(GameStateManager::Instance()->getMySDL()->getRenderer(), "cow-2.png");
 
-
+	cow = new Cow(Vector2D(100, 100), Vector2D(1,1), 2, 5, 1, 5);	
+	rabbit = new Rabbit(Vector2D(500, 100), Vector2D(1,1), 4, 5, 2, 5);
+	rabbit->getSteeringMechanism()->setFlee(true);
+	cow->getSteeringMechanism()->setPursuit(true);
+	cow->getSteeringMechanism()->setTarget(rabbit);
+	rabbit->getSteeringMechanism()->setTarget(cow);
 
 	if (cowTexture == NULL) {
 		std::cout << "NO cow loaded" << std::endl;
@@ -57,10 +62,15 @@ void GraphState::handleEvents(SDL_Event mainEvent)
 
 void GraphState::update(double dt) 
 {
+	cow->update(dt);
+	rabbit->update(dt);
+
 }
 
 void GraphState::draw() 
 {
+	cow->draw();
+	rabbit->draw();
 }
 
 GraphState::~GraphState(void)

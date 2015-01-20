@@ -8,7 +8,7 @@ public:
 	Entity(void);
 	Entity(Vector2D pos);
 
-	virtual void update();
+	virtual void update(double dt);
 	virtual void draw();
 
 	double getX();
@@ -19,15 +19,15 @@ public:
 
 	void setTexture(SDL_Texture* texture);
 	SDL_Texture* getTexture();
-
+	Vector2D m_vPosition;
 	virtual ~Entity(void);
 private:
 	SDL_Texture* texture;
 	double x;
 	double y;
 
-	
+
 protected:
-	Vector2D m_vPosition;
+
 };
 

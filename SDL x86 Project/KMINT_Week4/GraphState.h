@@ -17,7 +17,6 @@ private:
 
 	Cow* cow;
 	Rabbit* rabbit;
-	Weapon* weapon;
 	
 	std::vector<Vertex*>* route;
 

@@ -108,17 +108,23 @@ copy "$(SolutionDir)libjpeg-9.dll" "$(TargetDir)"
     <ClInclude Include="MySDL.h" />
     <ClInclude Include="Rabbit.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="SteeringBehaviors.h" />
     <ClInclude Include="utils.h" />
     <ClInclude Include="Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Cow.cpp" />
     <ClCompile Include="CowOwnedStates.cpp" />
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="GraphState.cpp" />
     <ClCompile Include="IGameState.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="MovingEntity.cpp" />
     <ClCompile Include="MySDL.cpp" />
+    <ClCompile Include="Rabbit.cpp" />
     <ClCompile Include="RabbitOwnedStates.cpp" />
+    <ClCompile Include="SteeringBehaviors.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
